@@ -1,0 +1,19 @@
+# Virtual environments
+venv/
+venv-linux/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Spark
+*.log
+.metastore_db/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Pyenv
+.python-version
