@@ -1,5 +1,7 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, to_date, trim, upper
+from pyspark.sql.functions import count
+from pyspark.sql.functions import coalesce
 
 def main():
 
@@ -26,8 +28,21 @@ def main():
         .drop("Row_ID")
 
         # convertir fechas
-        .withColumn("order_date", to_date(col("Order_Date"), "M/d/yyyy"))
-.withColumn("ship_date", to_date(col("Ship_Date"), "M/d/yyyy"))
+        .withColumn(
+            "order_date",
+            coalesce(
+                to_date(col("Order_Date"), "M/d/yyyy"),
+                to_date(col("Order_Date"), "d/M/yyyy")
+            )
+        )
+    
+        .withColumn(
+            "ship_date",
+            coalesce(
+                to_date(col("Ship_Date"), "M/d/yyyy"),
+                to_date(col("Ship_Date"), "d/M/yyyy")
+            )
+        )
 
         # normalizar texto
         .withColumn("customer_name", trim(col("Customer_Name")))
@@ -55,6 +70,21 @@ def main():
 
     print("Schema Silver:")
     df_silver.printSchema()
+
+    print("Validaciones de calidad...")
+
+    total_rows = df_silver.count()
+
+    null_sales = df_silver.filter(col("sales").isNull()).count()
+    negative_sales = df_silver.filter(col("sales") < 0).count()
+    null_dates = df_silver.filter(col("order_date").isNull()).count()
+
+    print(f"Total rows: {total_rows}")
+    print(f"Null sales: {null_sales}")
+    print(f"Negative sales: {negative_sales}")
+    print(f"Null order_date: {null_dates}")
+
+    df.select("Order_Date").show(20, False)
 
     # Escribir Silver particionado por año
     (
