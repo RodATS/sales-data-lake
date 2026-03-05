@@ -84,7 +84,7 @@ def main():
     print(f"Negative sales: {negative_sales}")
     print(f"Null order_date: {null_dates}")
 
-    df.select("Order_Date").show(20, False)
+    #df.select("Order_Date").show(20, False)
 
     # Escribir Silver particionado por año
     (
