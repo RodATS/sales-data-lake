@@ -1,5 +1,18 @@
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, sum, year, month
+from utils.config_loader import load_config
+
+
+config = load_config()
+
+silver_path = config["paths"]["silver_data"]
+gold_path = config["paths"]["gold_data"]
+
 
 def main():
 
@@ -10,8 +23,7 @@ def main():
         .getOrCreate()
     )
 
-    silver_path = "data/silver/sales"
-    gold_path = "data/gold"
+    
 
     df = spark.read.parquet(silver_path)
 

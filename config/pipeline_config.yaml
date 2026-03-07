@@ -1,0 +1,8 @@
+paths:
+  raw_data: data/raw/sales.csv
+  bronze_data: data/bronze/sales
+  silver_data: data/silver/sales
+  gold_data: data/gold
+
+logging:
+  log_folder: logs
