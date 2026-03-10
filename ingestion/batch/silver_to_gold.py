@@ -31,7 +31,7 @@ def main():
     df.printSchema()
 
     # --------------------------
-    # 1️⃣ Ventas por región
+    # 1 Ventas por región
     # --------------------------
 
     sales_by_region = (
@@ -47,7 +47,7 @@ def main():
     print("Tabla GOLD creada: sales_by_region")
 
     # --------------------------
-    # 2️⃣ Ventas por categoría
+    # 2 Ventas por categoría
     # --------------------------
 
     sales_by_category = (
@@ -63,7 +63,7 @@ def main():
     print("Tabla GOLD creada: sales_by_category")
 
     # --------------------------
-    # 3️⃣ Ventas por mes
+    # 3 Ventas por mes
     # --------------------------
 
     sales_by_month = (

@@ -16,18 +16,18 @@ logging.basicConfig(
 
 def run_step(step_name, command):
 
-    print(f"\n🚀 Ejecutando: {step_name}")
-    logging.info(f"Starting step: {step_name}")
+    print(f"\n Ejecutando: {step_name}")
+    logging.info(f"Iniciando: {step_name}")
 
     result = subprocess.run(command, shell=True)
 
     if result.returncode != 0:
         logging.error(f"Error in step: {step_name}")
-        print(f"❌ Error en {step_name}")
+        print(f" Error en {step_name}")
         sys.exit(1)
 
     logging.info(f"Completed step: {step_name}")
-    print(f"✅ {step_name} completado")
+    print(f" {step_name} completado")
 
 
 def main():
@@ -50,7 +50,7 @@ def main():
     )
 
     logging.info("Pipeline completed successfully")
-    print("\n🎉 Pipeline completado exitosamente")
+    print("\n Pipeline completado exitosamente")
 
 
 if __name__ == "__main__":
